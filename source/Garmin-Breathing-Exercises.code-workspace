@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "Garmin-Breathing-Exercises",
+			"path": "../../Garmin-Breathing-Exercises"
+		},
+		{
+			"name": "BreathingExercises",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}

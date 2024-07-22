@@ -1,24 +1,25 @@
 import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.Timer;
+import Toybox.Math;
 
 class BoxBreathingDelegate extends WatchUi.BehaviorDelegate {
 
     private var _inProgress = false;
+    private var _paused = false;
 
     private var _timer;
 
     private var _currentTimestamp;
 
-    private var _numCycles;
+    private var _maxSeconds;
 
     private var _view;
 
-    function initialize(_myView, _myCycles) {
+    function initialize(_myView, _mySeconds) {
         BehaviorDelegate.initialize();
         _view = _myView;
-        _numCycles = _myCycles;
-        _view.setCycles(_numCycles);
+        _maxSeconds = _mySeconds;
     }
 
     function onKey (keyEvent) {
@@ -39,6 +40,15 @@ class BoxBreathingDelegate extends WatchUi.BehaviorDelegate {
         if (!_inProgress) {
             _inProgress = true;
             startCountdown();
+        } else if (!_paused) {
+            _paused = true;
+            _maxSeconds -= _currentTimestamp;
+            _view.pauseTimer(_currentTimestamp);
+            _timer.stop();
+        } else {
+            _paused = false;
+            _view.unpauseTimer();
+            startCountdown();
         }
 
         return true;
@@ -51,7 +61,7 @@ class BoxBreathingDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function updateTimestamp () as Void {
-        if (_currentTimestamp == 16*_numCycles) {
+        if (_currentTimestamp == _maxSeconds) {
             _timer.stop();
         }
 

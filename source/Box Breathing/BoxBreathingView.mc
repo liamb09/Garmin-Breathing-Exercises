@@ -5,10 +5,14 @@ import Toybox.WatchUi;
 class BoxBreathingView extends WatchUi.View {
 
     private var _seconds = 0;
-    private var _numCycles;
+    private var _end;
 
-    function initialize() {
+    private var _timeOffset = 0;
+    private var _paused = false;
+
+    function initialize(_myEnd) {
         View.initialize();
+        _end = _myEnd;
     }
 
     // Load your resources here
@@ -33,8 +37,6 @@ class BoxBreathingView extends WatchUi.View {
         var circleY = dc.getHeight()-30;
         if (_seconds == 0) {
             instruction = "Press start";
-        } else if (_seconds == _numCycles*16) {
-            instruction = "Done!";
         } else if (relative_seconds >= 0 && relative_seconds < 4) {
             instruction = "Breathe in";
             circleX = dc.getWidth()/2 - 40;
@@ -52,8 +54,12 @@ class BoxBreathingView extends WatchUi.View {
             circleX = dc.getWidth()/2 + 40 - 20*(relative_seconds%4);
             circleY = dc.getHeight()-30;
         }
-
-        System.println(formatSeconds(210));
+        if (_paused) {
+            instruction = "Paused";
+        }
+        if (_seconds == _end) {
+            instruction = "Done!";
+        }
 
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLACK);
         dc.drawText(104, 20, Graphics.FONT_SMALL, "Box Breathing", Graphics.TEXT_JUSTIFY_CENTER);
@@ -77,7 +83,7 @@ class BoxBreathingView extends WatchUi.View {
     }
 
     function updateSeconds (s as Number) as Void {
-        _seconds = s;
+        _seconds = s+_timeOffset;
 
         WatchUi.requestUpdate();
     }
@@ -89,8 +95,15 @@ class BoxBreathingView extends WatchUi.View {
         return minutes.toString() + ":" + seconds.toString();
     }
 
-    function setCycles (n as Number) as Void {
-        _numCycles = n;
+    function pauseTimer (elapsedTime as Number) as Void {
+        _paused = true;
+        _timeOffset += elapsedTime;
+        WatchUi.requestUpdate();
+    }
+
+    function unpauseTimer () as Void {
+        _paused = false;
+        WatchUi.requestUpdate();
     }
 
 }

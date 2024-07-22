@@ -9,12 +9,12 @@ class BreathingExercisesMenuDelegate extends WatchUi.MenuInputDelegate {
     }
 
     function onMenuItem(item as Symbol) as Void {
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        var view = new TimePickerView();
         if (item == :box_breathing) {
-            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-            var view = new TimePickerView();
             WatchUi.pushView(view, new TimePickerDelegate(view, "Box Breathing"), WatchUi.SLIDE_UP);
-        } else if (item == :item_2) {
-            System.println("item 2");
+        } else if (item == :Four78_breathing) {
+            WatchUi.pushView(view, new TimePickerDelegate(view, "4-7-8 Breathing"), WatchUi.SLIDE_UP);
         }
     }
 

@@ -49,6 +49,7 @@ class TimePickerView extends WatchUi.View {
         }
 
         // draw focus box and arrows
+        dc.setPenWidth(2);
         var textDimensions = dc.getTextDimensions("00", Graphics.FONT_NUMBER_MEDIUM);
         if (_focus.equals("minutes")) {
             dc.drawRectangle(12, 85, textDimensions[0]+10, textDimensions[1]-25);

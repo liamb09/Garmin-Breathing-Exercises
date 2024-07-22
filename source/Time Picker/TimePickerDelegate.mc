@@ -66,6 +66,10 @@ class TimePickerDelegate extends WatchUi.BehaviorDelegate {
                 var view = new BoxBreathingView(_minutes*60 + _seconds);
                 WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
                 WatchUi.pushView(view, new BoxBreathingDelegate(view, _minutes*60 + _seconds), WatchUi.SLIDE_UP);
+            } else if (_nextExercise.equals("4-7-8 Breathing")) {
+                var view = new Four78BreathingView(_minutes*60 + _seconds);
+                WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+                WatchUi.pushView(view, new Four78BreathingDelegate(view, _minutes*60 + _seconds), WatchUi.SLIDE_UP);
             }
         }
 

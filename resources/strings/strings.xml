@@ -1,11 +1,12 @@
 <strings>
     <string id="AppName">Breathing 
 Exercises</string>
+    <string id="app_desc">Press start to select\nan exercise from\nthe menu</string>
 
     <string id="prompt">Click the menu button</string>
 
     <string id="box_breathing">Box Breathing</string>
-    <string id="menu_label_2">Item 2</string>
+    <string id="Four78_breathing">4-7-8 Breathing</string>
 
     <string id="box_breathing_title">Box
 Breathing</string>

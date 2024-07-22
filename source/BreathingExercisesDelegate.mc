@@ -8,8 +8,17 @@ class BreathingExercisesDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onMenu() as Boolean {
-        WatchUi.pushView(new Rez.Menus.MainMenu(), new BreathingExercisesMenuDelegate(), WatchUi.SLIDE_UP);
+        openMenu();
         return true;
+    }
+
+    function onSelect () as Boolean {
+        openMenu();
+        return true;
+    }
+
+    function openMenu () as Void {
+        WatchUi.pushView(new Rez.Menus.MainMenu(), new BreathingExercisesMenuDelegate(), WatchUi.SLIDE_UP);
     }
 
 }

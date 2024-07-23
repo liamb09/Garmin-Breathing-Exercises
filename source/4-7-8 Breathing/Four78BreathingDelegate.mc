@@ -5,6 +5,8 @@ import Toybox.Math;
 
 class Four78BreathingDelegate extends WatchUi.BehaviorDelegate {
 
+    private var _vibrate = Application.Storage.getValue("vibration");
+
     private var _inProgress = false;
     private var _paused = false;
 
@@ -15,6 +17,8 @@ class Four78BreathingDelegate extends WatchUi.BehaviorDelegate {
     private var _maxSeconds;
 
     private var _view;
+
+    private var _pausedTime = 0;
 
     function initialize(_myView, _mySeconds) {
         BehaviorDelegate.initialize();
@@ -31,6 +35,9 @@ class Four78BreathingDelegate extends WatchUi.BehaviorDelegate {
 
         // back
         } else if (keyEvent.getKey() == 5) {
+            if (_timer != null) {
+                _timer.stop();
+            }
             WatchUi.popView(WatchUi.SLIDE_DOWN);
         }
         return true;
@@ -43,6 +50,7 @@ class Four78BreathingDelegate extends WatchUi.BehaviorDelegate {
         } else if (!_paused) {
             _paused = true;
             _maxSeconds -= _currentTimestamp;
+            _pausedTime += _currentTimestamp;
             _view.pauseTimer(_currentTimestamp);
             _timer.stop();
         } else {
@@ -63,6 +71,10 @@ class Four78BreathingDelegate extends WatchUi.BehaviorDelegate {
     function updateTimestamp () as Void {
         if (_currentTimestamp == _maxSeconds) {
             _timer.stop();
+        }
+
+        if (_vibrate && ((_pausedTime + _currentTimestamp) % 19 == 0 || (_pausedTime + _currentTimestamp) % 19 == 4 || (_pausedTime + _currentTimestamp) % 19 == 11)) {
+            Attention.vibrate([new Attention.VibeProfile(25, 100)]);
         }
 
         _view.updateSeconds(_currentTimestamp);

@@ -1,7 +1,6 @@
 <strings>
-    <string id="AppName">Breathing 
-Exercises</string>
-    <string id="app_desc">Press start to select\nan exercise from\nthe menu</string>
+    <string id="AppName">Breathing\nExercises</string>
+    <string id="app_desc">Press START to select\nan exercise. Press\nDOWN to go to\nsettings.</string>
 
     <string id="prompt">Click the menu button</string>
 

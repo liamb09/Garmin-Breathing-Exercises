@@ -28,6 +28,9 @@ class BreathingExercisesDelegate extends WatchUi.BehaviorDelegate {
 
         // down
         } else if (keyEvent.getKey() == 8) {
+            if (Application.Storage.getValue("vibration") == null) {
+                Application.Storage.setValue("vibration", false);
+            }
             var menu = new WatchUi.Menu2({:title=>"Settings"});
             var vibeEnabled = Application.Storage.getValue("vibration");
             menu.addItem(
@@ -42,7 +45,7 @@ class BreathingExercisesDelegate extends WatchUi.BehaviorDelegate {
             WatchUi.pushView(menu, new SettingsDelegate(), WatchUi.SLIDE_UP);
         // back
         } else if (keyEvent.getKey() == 5) {
-            
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
         return true;
     }

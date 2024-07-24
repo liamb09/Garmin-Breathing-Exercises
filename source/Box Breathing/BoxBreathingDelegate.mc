@@ -74,7 +74,7 @@ class BoxBreathingDelegate extends WatchUi.BehaviorDelegate {
         }
 
         if (_vibrate && (_pausedTime + _currentTimestamp) % 4 == 0) {
-            Attention.vibrate([new Attention.VibeProfile(25, 100)]);
+            Attention.vibrate([new Attention.VibeProfile(50, 200)]);
         }
 
         _view.updateSeconds(_currentTimestamp);

@@ -19,7 +19,6 @@ class BreathingExercisesDelegate extends WatchUi.BehaviorDelegate {
 
     function openMenu () as Void {
         WatchUi.pushView(new Rez.Menus.MainMenu(), new BreathingExercisesMenuDelegate(), WatchUi.SLIDE_UP);
-        // TODO: add settings page and vibration
     }
 
     function onKey (keyEvent) {

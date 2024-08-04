@@ -52,6 +52,7 @@ class TimePickerDelegate extends WatchUi.BehaviorDelegate {
                 _view.setFocus("minutes");
             } else if (_focus.equals("minutes")) {
                 WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+                WatchUi.pushView(new Rez.Menus.MainMenu(), new BreathingExercisesMenuDelegate(), WatchUi.SLIDE_UP);
             }
         }
         return true;

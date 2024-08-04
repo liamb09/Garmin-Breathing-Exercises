@@ -35,10 +35,16 @@ class Four78BreathingDelegate extends WatchUi.BehaviorDelegate {
 
         // back
         } else if (keyEvent.getKey() == 5) {
-            if (_timer != null) {
-                _timer.stop();
+            if (_timer == null) {
+                WatchUi.popView(WatchUi.SLIDE_DOWN);
+            } else if (_timer != null) {
+                if (!_paused) {
+                    // pause it by basically turning it into the select button
+                    onSelect();
+                } else {
+                    WatchUi.popView(WatchUi.SLIDE_DOWN);
+                }
             }
-            WatchUi.popView(WatchUi.SLIDE_DOWN);
         }
         return true;
     }
